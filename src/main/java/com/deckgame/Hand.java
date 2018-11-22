@@ -63,6 +63,9 @@ public class Hand{
         int firstCardValue = list.get(0).getCardinality();
         int secondCardValue = list.get(1).getCardinality();
         int thirdCardValue = list.get(2).getCardinality();
+        if(firstCardValue + secondCardValue + thirdCardValue == 19){
+            return true;
+        }
         return (abs(secondCardValue - firstCardValue )== 1) && (abs(thirdCardValue - secondCardValue) == 1);
     }
 
@@ -79,7 +82,7 @@ public class Hand{
     public int getHighestRankedCard(TreeMap<Rank,Integer> map) {
         Rank highest = Rank.TWO;
         for (Rank rank : map.keySet()) {
-            if (rank.getCardinality() < highest.getCardinality()) {
+            if (rank.getCardinality() > highest.getCardinality()) {
                 highest = rank;
             }
         }

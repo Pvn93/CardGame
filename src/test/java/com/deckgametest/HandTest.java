@@ -71,7 +71,7 @@ public class HandTest {
         cards.add(QueenOfSpades);
         cards.add(JackOfSpades);
         hand.setCards(cards);
-        assertEquals(1,hand.getValue());
+        assertEquals(14,hand.getValue());
     }
 
     @Test
@@ -80,13 +80,26 @@ public class HandTest {
         Card ThreeOfSpades = new Card(Rank.THREE, Suit.SPADE);
         cards.add(ThreeOfSpades);
         hand.setCards(cards);
-        assertEquals(2,hand.getValue());
+        assertEquals(3,hand.getValue());
     }
 
     @Test
     public void clearHand(){
         hand.clearHand();
         assertEquals(0,hand.getCards().size());
+    }
+
+    @Test
+    public void getValueOfHandConsecutiveEdgeCase() {
+        List<Card> cards = new ArrayList<>();
+        Card AceOfSpades = new Card(Rank.ACE, Suit.SPADE);
+        Card JackOfSpades = new Card(Rank.TWO, Suit.SPADE);
+        Card QueenOfSpades = new Card(Rank.THREE, Suit.SPADE);
+        cards.add(AceOfSpades);
+        cards.add(JackOfSpades);
+        cards.add(QueenOfSpades);
+        hand.setCards(cards);
+        assertEquals(98,hand.getValue());
     }
 
 }
