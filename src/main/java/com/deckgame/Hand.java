@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import static java.lang.Math.abs;
 
 public class Hand{
+
     private List<Card> cards = new ArrayList<>();
     public static final int BEST_VALUE_OF_HAND = 99;
     public static final int SECOND_BEST_VALUE_OF_HAND = 98;

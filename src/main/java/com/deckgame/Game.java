@@ -2,52 +2,94 @@ package com.deckgame;
 
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 public class Game {
 
     private static final Logger logger = Logger.getLogger(Game.class);
 
-    public static void main(String [] args){
-        Deck deck = new Deck();
-        Player playerA = new Player();
-        Player playerB = new Player();
-        dealCardsToThePlayers(deck, playerA, playerB, 3);
+    public static void main(String [] args) throws Exception {
 
-        Player winner = compareHandsOfEachPlayerAndPickWinner(deck,playerA, playerB);
+        Deck deck = new Deck();
+        int nbrOfCardsToDeal = 3;
+        int nbrOfPlayers = Integer.valueOf(args[0]);
+
+        if(nbrOfPlayers <= 1){
+            throw new Exception("The game needs atleast two players");
+        }
+
+        List<Player> players = new ArrayList<>();
+        for(int i=0; i < nbrOfPlayers; i++){
+            players.add(new Player());
+        }
+
+        for(int i=0; i < nbrOfCardsToDeal; i++){
+            players.stream().forEach(p -> dealCardToPlayer(deck,p));
+        }
+
+        Player winner = compareHandsOfEachPlayerAndPickWinner(deck,players);
         logger.info("Calculating winner .....");
         logger.info("The winner is :"+ winner);
-        logger.info("The hand of each player:");
-        logger.info(playerA);
-        logger.info(playerB);
-
+        logger.info("The hand of each player:" + players);
     }
 
-    public static void dealCardsToThePlayers(Deck deck, Player playerA, Player playerB, int nbrOfCardsToDeal){
-        for(int i=0; i < nbrOfCardsToDeal; i++) {
-            playerA.getHand().getCards().add(deck.deal());
-            playerB.getHand().getCards().add(deck.deal());
+
+    public static void dealCardToPlayer(Deck deck, Player player){
+        player.getHand().getCards().add(deck.deal());
+    }
+
+    public static Player compareHandsOfEachPlayerAndPickWinner(Deck deck , List<Player> players){
+
+        TreeMap<Integer,List<Player>> playerHandValueMap = new TreeMap<>(Collections.reverseOrder());
+        List<Player> playersHavingSameValue;
+
+        for(Player p : players){
+            if(playerHandValueMap.get(p.getHand().getValue()) != null){
+                playersHavingSameValue = playerHandValueMap.get(p.getHand().getValue());
+            }
+            else{
+                playersHavingSameValue = new ArrayList<>();
+            }
+            playersHavingSameValue.add(p);
+            playerHandValueMap.put(p.getHand().getValue(), playersHavingSameValue);
         }
-    }
-
-    public static Player compareHandsOfEachPlayerAndPickWinner(Deck deck ,Player playerA, Player playerB){
-        int valueOfPlayerAHand = playerA.getHand().getValue();
-        int valueOfPlayerBHand = playerB.getHand().getValue();
 
         if(logger.isDebugEnabled()) {
-            logger.debug("playerA value:" + valueOfPlayerAHand);
-            logger.debug("playerB value:" + valueOfPlayerBHand);
+            logger.debug("playerHandValueMap:" + playerHandValueMap);
         }
-        if(valueOfPlayerAHand > valueOfPlayerBHand){
-            return playerA;
+
+        Optional<Integer> firstValue = playerHandValueMap.keySet().stream().findFirst();
+
+        // if only player has the highest hand value, declare that player as winner
+        if(playerHandValueMap.get(firstValue.get()).size() == 1){
+            return playerHandValueMap.get(firstValue.get()).get(0);
         }
-        else if(valueOfPlayerBHand > valueOfPlayerAHand){
-            return playerB;
-        }
+        // if more than one player has the same hand value, deal one more round to those players and compare again
         else{
-            logger.info("Tied...Dealing one more round and comparing");
-            playerA.getHand().clearHand();
-            playerB.getHand().clearHand();
-            dealCardsToThePlayers(deck, playerA, playerB, 1);
-            return compareHandsOfEachPlayerAndPickWinner(deck,playerA, playerB);
+            // find tied players
+            List<Player> tiedPlayers = playerHandValueMap.get(firstValue.get());
+            logger.info("Tied between " + tiedPlayers.size() + " players");
+
+            // clear their hand
+            if(logger.isDebugEnabled()) {
+                logger.debug("Hands of the tied players....");
+                logger.debug(tiedPlayers);
+            }
+            tiedPlayers.stream().forEach(p -> p.getHand().clearHand());
+
+            // deal once again to them
+            logger.info("Dealing them one more round");
+            tiedPlayers.stream().forEach(p -> dealCardToPlayer(deck,p));
+
+            // return the winner
+            return compareHandsOfEachPlayerAndPickWinner(deck, tiedPlayers);
         }
+
     }
+
 }
