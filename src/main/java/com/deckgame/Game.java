@@ -11,7 +11,7 @@ public class Game {
         Player playerB = new Player();
         dealCardsToThePlayers(deck, playerA, playerB, 3);
 
-        Player winner = compareHandsOfEachPlayer(deck,playerA, playerB);
+        Player winner = compareHandsOfEachPlayerAndPickWinner(deck,playerA, playerB);
         logger.info("Calculating winner .....");
         logger.info("The winner is :"+ winner);
         logger.info("The hand of each player:");
@@ -27,7 +27,7 @@ public class Game {
         }
     }
 
-    public static Player compareHandsOfEachPlayer(Deck deck ,Player playerA, Player playerB){
+    public static Player compareHandsOfEachPlayerAndPickWinner(Deck deck ,Player playerA, Player playerB){
         int valueOfPlayerAHand = playerA.getHand().getValue();
         int valueOfPlayerBHand = playerB.getHand().getValue();
         if(logger.isDebugEnabled()) {
@@ -45,7 +45,7 @@ public class Game {
             playerA.getHand().clearHand();
             playerB.getHand().clearHand();
             dealCardsToThePlayers(deck, playerA, playerB, 1);
-            return compareHandsOfEachPlayer(deck,playerA, playerB);
+            return compareHandsOfEachPlayerAndPickWinner(deck,playerA, playerB);
         }
     }
 }

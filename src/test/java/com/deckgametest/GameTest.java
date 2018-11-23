@@ -65,7 +65,7 @@ public class GameTest {
         player1.setHand(hand1);
         player2.setHand(hand2);
 
-        assertEquals(player2,Game.compareHandsOfEachPlayer(deck,player1,player2));
+        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,player1,player2));
     }
 
     @Test
@@ -99,6 +99,6 @@ public class GameTest {
         player1.setHand(hand1);
         player2.setHand(hand2);
 
-        assertEquals(player2,Game.compareHandsOfEachPlayer(deck,player1,player2));
+        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,player1,player2));
     }
 }
