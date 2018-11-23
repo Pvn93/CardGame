@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 public class Game {
 
     private static final Logger logger = Logger.getLogger(Game.class);
+
     public static void main(String [] args){
         Deck deck = new Deck();
         Player playerA = new Player();
@@ -30,6 +31,7 @@ public class Game {
     public static Player compareHandsOfEachPlayerAndPickWinner(Deck deck ,Player playerA, Player playerB){
         int valueOfPlayerAHand = playerA.getHand().getValue();
         int valueOfPlayerBHand = playerB.getHand().getValue();
+
         if(logger.isDebugEnabled()) {
             logger.debug("playerA value:" + valueOfPlayerAHand);
             logger.debug("playerB value:" + valueOfPlayerBHand);

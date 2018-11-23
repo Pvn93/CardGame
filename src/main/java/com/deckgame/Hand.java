@@ -12,6 +12,9 @@ import static java.lang.Math.abs;
 
 public class Hand{
     private List<Card> cards = new ArrayList<>();
+    public static final int BEST_VALUE_OF_HAND = 99;
+    public static final int SECOND_BEST_VALUE_OF_HAND = 98;
+    public static final int THIRD_BEST_VALUE_OF_HAND = 97;
 
     public List<Card> getCards() {
         return this.cards;
@@ -25,7 +28,7 @@ public class Hand{
     public int getValue(){
         TreeMap<Rank, Integer> countMap = new TreeMap<>();
         ArrayList<Rank> rankArrayList = new ArrayList<>();
-        if(cards.size() == 1){
+        if(cards.size() == 1) {
             return cards.get(0).getRank().getCardinality();
         }
         else{
@@ -38,13 +41,13 @@ public class Hand{
                 rankArrayList.add(card.getRank());
             }
             if (areThreeCardsOfTheSameNumber(countMap)) {
-                return 99;
+                return BEST_VALUE_OF_HAND;
             }
             else if(areThreeNumbersConsecutive(rankArrayList)){
-                return 98;
+                return SECOND_BEST_VALUE_OF_HAND;
             }
             else if(areTwoCardsOfTheSameNumber(countMap)){
-                return 97;
+                return THIRD_BEST_VALUE_OF_HAND;
             }
             else{
                 return getHighestRankedCard(countMap);

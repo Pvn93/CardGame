@@ -4,6 +4,7 @@ import com.deckgame.Card;
 import com.deckgame.Hand;
 import com.deckgame.Rank;
 import com.deckgame.Suit;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,6 +23,11 @@ public class HandTest {
     @Spy
     Hand hand;
 
+    public static final int BEST_VALUE_OF_HAND = 99;
+    public static final int SECOND_BEST_VALUE_OF_HAND = 98;
+    public static final int THIRD_BEST_VALUE_OF_HAND = 97;
+
+
     @Test
     public void getValueOfHandConsecutive() {
         List<Card> cards = new ArrayList<>();
@@ -32,7 +38,7 @@ public class HandTest {
         cards.add(JackOfSpades);
         cards.add(QueenOfSpades);
         hand.setCards(cards);
-        assertEquals(98,hand.getValue());
+        assertEquals(SECOND_BEST_VALUE_OF_HAND,hand.getValue());
     }
 
     @Test
@@ -45,7 +51,7 @@ public class HandTest {
         cards.add(AceOfHeart);
         cards.add(AceOfDiamond);
         hand.setCards(cards);
-        assertEquals(99,hand.getValue());
+        assertEquals(BEST_VALUE_OF_HAND,hand.getValue());
     }
 
     @Test
@@ -58,7 +64,7 @@ public class HandTest {
         cards.add(AceOfHeart);
         cards.add(JackOfSpades);
         hand.setCards(cards);
-        assertEquals(97,hand.getValue());
+        assertEquals(THIRD_BEST_VALUE_OF_HAND,hand.getValue());
     }
 
     @Test
@@ -99,7 +105,7 @@ public class HandTest {
         cards.add(JackOfSpades);
         cards.add(QueenOfSpades);
         hand.setCards(cards);
-        assertEquals(98,hand.getValue());
+        assertEquals(SECOND_BEST_VALUE_OF_HAND,hand.getValue());
     }
 
 }
