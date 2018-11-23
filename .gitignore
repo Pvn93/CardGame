@@ -1,0 +1,17 @@
+.DS_Store
+.gradle/*
+.idea/.name
+.idea/checkstyle-idea.xml
+.idea/codeStyles/*
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+*.log
+*.xml
+build/*
+gradle/*
+gradlew
+gradlew.bat
+out/*
+*.iml
+.idea/*

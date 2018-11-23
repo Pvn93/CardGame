@@ -1,18 +1,22 @@
 package com.deckgame;
 
+import org.apache.log4j.Logger;
+
 public class Game {
 
-    //final static Logger logger = Logger.getLogger(com.deckgame.Game.class);
+    private static final Logger logger = Logger.getLogger(Game.class);
     public static void main(String [] args){
         Deck deck = new Deck();
         Player playerA = new Player();
         Player playerB = new Player();
         dealCardsToThePlayers(deck, playerA, playerB, 3);
-        //logger.info("Calculating winner .....");
-        //logger.info("The winner is :"+ compareHandsOfEachPlayer(deck,playerA, playerB));
-        //logger.info("The hand of each player:");
-        //logger.info(playerA);
-        //logger.info(playerB);
+
+        Player winner = compareHandsOfEachPlayer(deck,playerA, playerB);
+        logger.info("Calculating winner .....");
+        logger.info("The winner is :"+ winner);
+        logger.info("The hand of each player:");
+        logger.info(playerA);
+        logger.info(playerB);
 
     }
 
@@ -26,8 +30,10 @@ public class Game {
     public static Player compareHandsOfEachPlayer(Deck deck ,Player playerA, Player playerB){
         int valueOfPlayerAHand = playerA.getHand().getValue();
         int valueOfPlayerBHand = playerB.getHand().getValue();
-        //logger.debug("playerA value:" + valueOfPlayerAHand);
-        //logger.debug("playerB value:" + valueOfPlayerBHand);
+        if(logger.isDebugEnabled()) {
+            logger.debug("playerA value:" + valueOfPlayerAHand);
+            logger.debug("playerB value:" + valueOfPlayerBHand);
+        }
         if(valueOfPlayerAHand > valueOfPlayerBHand){
             return playerA;
         }
@@ -35,7 +41,7 @@ public class Game {
             return playerB;
         }
         else{
-            //logger.info("Tied...Dealing one more round and comparing");
+            logger.info("Tied...Dealing one more round and comparing");
             playerA.getHand().clearHand();
             playerB.getHand().clearHand();
             dealCardsToThePlayers(deck, playerA, playerB, 1);
