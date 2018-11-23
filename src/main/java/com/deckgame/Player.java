@@ -14,7 +14,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "com.deckgame.Player{" +
+        return "Player{" +
                 "hand=" + hand +
                 '}';
     }

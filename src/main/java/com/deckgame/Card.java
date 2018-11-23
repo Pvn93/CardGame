@@ -17,7 +17,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "com.deckgame.Card{" +
+        return "Card{" +
                 "rank=" + rank +
                 ", suit=" + suit +
                 '}';

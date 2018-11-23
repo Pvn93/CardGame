@@ -97,7 +97,7 @@ public class Hand{
 
     @Override
     public String toString() {
-        return "com.deckgame.Hand{" +
+        return "Hand{" +
                 "cards=" + cards +
                 '}';
     }
