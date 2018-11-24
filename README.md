@@ -18,7 +18,7 @@ The festival season is here and you realise it's hard to play all those complica
 * If the top card has the same value, each of the tied players draws another card till a winner is found.
 * For now the suit (spades/hearts etc...), does not matter.
 
-## Installation
+## Running the application
 * Clone this repository and navigate to project root directory
 * Run the application by providing the number of players as an argument to the gradle task 'run'
 * Eg: If you want the game simulated between two players, run the following:

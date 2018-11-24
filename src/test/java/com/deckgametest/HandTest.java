@@ -4,7 +4,6 @@ import com.deckgame.Card;
 import com.deckgame.Hand;
 import com.deckgame.Rank;
 import com.deckgame.Suit;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,7 +1,4 @@
 package com.deckgame;
-
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +32,7 @@ public class Hand{
         else{
             for(Card card : cards){
                 int count=0;
-                if(countMap.size() > 0 && countMap.get(card.getRank()) != null) {
+                if(!countMap.isEmpty() && countMap.get(card.getRank()) != null) {
                     count = countMap.get(card.getRank());
                 }
                 countMap.put(card.getRank(),count+1);
