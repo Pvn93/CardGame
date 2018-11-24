@@ -23,6 +23,6 @@ The festival season is here and you realise it's hard to play all those complica
 * Run the application by providing the number of players as an argument to the gradle task 'run'
 * Eg: If you want the game simulated between two players, run the following:
 ```bash
-gradle run --args "2"
+./gradlew run --args "2"
 
 
