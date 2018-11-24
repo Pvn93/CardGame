@@ -26,18 +26,19 @@ public class GameTest {
 
 
     @Test
-    public void dealCardsToThePlayers() {
+    public void dealCardToPlayer() {
         Player player1 = new Player();
-        Player player2 = new Player();
         Deck deck = new Deck();
-        Game.dealCardsToThePlayers(deck, player1,player2,3);
-        assertEquals(46,deck.getCards().size());
+        Game.dealCardToPlayer(deck, player1);
+        assertEquals(51,deck.getCards().size());
+        assertEquals(1,player1.getHand().getCards().size());
     }
 
     @Test
     public void compareHandsOfEachPlayerOne() {
         Player player1 = new Player();
         Player player2 = new Player();
+        List<Player> players = new ArrayList<>();
         Deck deck = new Deck();
 
         Hand hand1 = new Hand();
@@ -64,14 +65,16 @@ public class GameTest {
 
         player1.setHand(hand1);
         player2.setHand(hand2);
-
-        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,player1,player2));
+        players.add(player1);
+        players.add(player2);
+        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,players));
     }
 
     @Test
     public void compareHandsOfEachPlayerTwo() {
         Player player1 = new Player();
         Player player2 = new Player();
+        List<Player> players = new ArrayList<>();
         Deck deck = new Deck();
 
         Hand hand1 = new Hand();
@@ -98,7 +101,9 @@ public class GameTest {
 
         player1.setHand(hand1);
         player2.setHand(hand2);
+        players.add(player1);
+        players.add(player2);
 
-        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,player1,player2));
+        assertEquals(player2,Game.compareHandsOfEachPlayerAndPickWinner(deck,players));
     }
 }
