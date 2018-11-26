@@ -12,13 +12,13 @@ public class Game {
 
     private static final Logger logger = Logger.getLogger(Game.class);
 
-    public static void main(final String [] args) throws InValidNbrOfPlayersException {
+    public static void main(final String [] args) throws InValidGameScenarioException {
 
         final int nbrOfCardsToDeal = Integer.parseInt(args[1]);
         final int nbrOfPlayers = Integer.parseInt(args[0]);
 
         if(nbrOfPlayers <= 1 || nbrOfCardsToDeal < 1){
-            throw new InValidNbrOfPlayersException("The game needs at least two players and at least one card to deal");
+            throw new InValidGameScenarioException("The game needs at least two players and at least one card to deal");
         }
 
         List<Player> players = new ArrayList<>();
