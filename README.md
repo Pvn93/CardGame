@@ -20,9 +20,9 @@ The festival season is here and you realise it's hard to play all those complica
 
 ## Running the application
 * Clone this repository and navigate to project root directory
-* Run the application by providing the number of players as an argument to the gradle task 'run'
-* Eg: If you want the game simulated between two players, run the following:
+* Run the application by providing the number of players, no. of cards to be dealt as arguments to the gradle task 'run'
+* Eg: If you want the game simulated between two players and you want to deal three cards to each player, run the following:
 ```bash
-./gradlew run --args "2"
+./gradlew run --args "2 3"
 
 

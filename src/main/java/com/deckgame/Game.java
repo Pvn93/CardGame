@@ -14,10 +14,11 @@ public class Game {
 
     public static void main(final String [] args) throws InValidNbrOfPlayersException {
 
-        final int nbrOfCardsToDeal = 3;
+        final int nbrOfCardsToDeal = Integer.parseInt(args[1]);
         final int nbrOfPlayers = Integer.parseInt(args[0]);
-        if(nbrOfPlayers <= 1){
-            throw new InValidNbrOfPlayersException("The game needs at least two players");
+
+        if(nbrOfPlayers <= 1 || nbrOfCardsToDeal < 1){
+            throw new InValidNbrOfPlayersException("The game needs at least two players and at least one card to deal");
         }
 
         List<Player> players = new ArrayList<>();
@@ -78,7 +79,7 @@ public class Game {
                 logger.info("Tied between " + tiedPlayers.size() + " players");
             }
             // clear their hand
-            if(logger.isDebugEnabled()) {
+            if(logger.isInfoEnabled()) {
                 logger.debug("Hands of the tied players....");
                 logger.debug(tiedPlayers);
             }
